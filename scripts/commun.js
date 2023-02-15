@@ -13,3 +13,24 @@ body.prepend(navbar);
 const footer = document.createElement('footer');
 footer.innerHTML = '© 2022 - 2023 - Tous droits réservés';
 body.appendChild(footer);
+
+// Charger fonctions :
+const fonctions = {
+  utils: [],
+  composants: ['popup']
+}
+
+fonctions.composants.forEach(composant => {
+  charger(`scripts/composants/${composant}.js`);
+});
+
+fonctions.utils.forEach(util => {
+  charger(`scripts/utils/${util}.js`);
+});
+
+function charger(src) {
+  const script = document.createElement('script');
+  script.src = src;
+  script.type = 'text/javascript'
+  body.appendChild(script);
+}

@@ -2,7 +2,9 @@
 <html>
 <head>
     <title>Fractales</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/accueil.css">
+
 </head>
 <body>
     <header>
@@ -10,10 +12,16 @@
             Fractales
         </h1>
     </header>
+    <button onclick="popup('aa', 'bbb');">Charger les articles</button>
     <section class="section">
         <h1>
             Articles
         </h1>
+
+        <br><label for="site-search"> <h3>Rechercher un article: </h3></label>
+        <input type="search" id="article-search" name="q" class="search">
+        <br> <br>
+
         <div id="articles">
             <!-- Générés automatiquement, voir scripts/pages/accueil.js -->
         </div>
@@ -35,8 +43,8 @@
     </section>
     <iframe src="relou.html"></iframe>
 </body>
-<script type="module" src="./scripts/pages/accueil.js"></script>
-<script type="module" src="./scripts/commun.js"></script>
+<script type="text/javascript" src="./scripts/pages/accueil.js"></script>
+<script type="text/javascript" src="./scripts/commun.js"></script>
 <script>
     function ajouterArticle(e) {
         e.preventDefault();
