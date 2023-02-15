@@ -31,3 +31,15 @@ for (let index = 0; index < articles.length; index++) {
     </article>
     `
 }
+
+function ajouterArticle(e) {
+    // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
+    e.preventDefault();
+    const articleId = 2;
+    
+    monter(
+        popup(
+            'Succès', 
+            `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`
+    ));
+}

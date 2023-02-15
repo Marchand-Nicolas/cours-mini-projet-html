@@ -1,5 +1,7 @@
+const head = document.querySelector('head');
 const body = document.querySelector('body');
 
+// Charger les éléments de base (navbar, footer, etc.)
 const navbar = document.createElement('nav');
 navbar.innerHTML = `
 <a href="/">
@@ -9,26 +11,28 @@ navbar.innerHTML = `
 Accueil</a>
 `;
 body.prepend(navbar);
-
 const footer = document.createElement('footer');
 footer.innerHTML = '© 2022 - 2023 - Tous droits réservés';
 body.appendChild(footer);
 
-// Charger fonctions :
+// Charger les autres scripts et composants utiles :
 const fonctions = {
-  utils: [],
-  composants: ['popup']
+  utils: ['chargerStyle', 'monter'],
+  composants: ['popup'],
+  pages: ['accueil']
 }
-
-fonctions.composants.forEach(composant => {
-  charger(`scripts/composants/${composant}.js`);
-});
-
 fonctions.utils.forEach(util => {
-  charger(`scripts/utils/${util}.js`);
+  chargerScript(`scripts/utils/${util}.js`);
+});
+fonctions.composants.forEach(composant => {
+  chargerScript(`scripts/composants/${composant}.js`);
+});
+fonctions.pages.forEach(page => {
+  chargerScript(`scripts/pages/${page}.js`);
 });
 
-function charger(src) {
+function chargerScript(src) {
+  // Créer un élément <script> pour charger le fichier JS
   const script = document.createElement('script');
   script.src = src;
   script.type = 'text/javascript'
