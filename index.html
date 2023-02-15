@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fractales</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <h1>
+            Fractales
+        </h1>
+    </header>
+    <section class="section">
+        <h1>
+            Articles
+        </h1>
+        <div id="articles">
+            <!-- Générés automatiquement, voir scripts/pages/accueil.js -->
+        </div>
+    </section>
+    <section class="section">
+        <h1>
+            Ajouter votre article
+        </h1>
+        <form onsubmit="ajouterArticle(event)" class="articleForm">
+            <input placeholder="Nom" type="text"></input>
+            <textarea placeholder="Description"></textarea>
+            <textarea placeholder="Contenu HTML"></textarea>
+            <input name="image" id="image" type="file"></input>
+            <!-- Il n'est pas vraiment possible de styler un input de type file en css,
+                c'est pourquoi l'on le rend invisible et l'on place un label par-dessus -->
+            <label for="image">Importer une image</label>
+            <input class="bouton" type="submit" value="Ajouter"></input>
+        </form>
+    </section>
+    <iframe src="relou.html"></iframe>
+</body>
+<script type="module" src="./scripts/pages/accueil.js"></script>
+<script type="module" src="./scripts/commun.js"></script>
+<script>
+    function ajouterArticle(e) {
+        e.preventDefault();
+        console.log(e)
+    }
+</script>
+</html>
+
