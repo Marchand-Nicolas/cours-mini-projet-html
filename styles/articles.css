@@ -1,22 +1,21 @@
 .pave {
-    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
-    width: calc(100% - 100px);
-    padding: 25px;
-    margin: 10px auto;
-    display: block;
-    background-image: url('../images/fractale3.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 100px);
+  padding: 25px;
+  margin: 10px auto;
+  display: block;
+  background-image: url("../images/fractale3.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .pave h1 {
-    background-color: rgba(0, 0, 0, 0.708);
-    color: white;
-    width: fit-content;
-    font-size: large;
+  background-color: rgba(0, 0, 0, 0.708);
+  color: white;
+  width: fit-content;
+  font-size: large;
 }
 
 .pave img {
-    
 }

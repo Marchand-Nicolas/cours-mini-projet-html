@@ -1,3 +1,5 @@
+const api = "http://localhost:8000"
+
 const articles = [
     {
         titre: "Les Fractales: Kesquecé?",
@@ -16,30 +18,51 @@ const articles = [
     }
 ]
 
-const container = document.getElementById('articles')
-
-for (let index = 0; index < articles.length; index++) {
-    const element = articles[index];
-    container.innerHTML += `
-    <article style="background-image: url('images/articles/${element.page}.jpg')">
-        <a href="articles/${element.page}.html">
-            <h1>${element.titre}</h1>
-            <p>
-                ${element.description}
-            </p>
-        </a>
-    </article>
-    `
+function chargerArticles() {
+    const container = document.getElementById('articles')
+    container.innerHTML = ''
+    for (let index = 0; index < articles.length; index++) {
+        const element = articles[index];
+        container.innerHTML += `
+        <article style="background-image: url('images/articles/${element.page}.jpg')">
+            <a href="articles/${element.page}.html">
+                <h1>${element.titre}</h1>
+                <p>
+                    ${element.description}
+                </p>
+            </a>
+        </article>
+        `
+    }
 }
+chargerArticles()
 
 function ajouterArticle(e) {
     // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
     e.preventDefault();
+
     const articleId = 2;
-    
+    const form = e.target
+    const formData = new FormData(form)
+    const titre = document.getElementById('formArticleTitre').value
+    const description = document.getElementById('formArticleDescription').value
+    const contenu = document.getElementById('formArticleContenu').value
+    formData.append("titre", titre)
+    formData.append("description", description)
+    formData.append("contenu", contenu)
+    const requestOptions = {
+        method: 'POST',
+        body: formData
+    };
+    fetch(`${api}/addArticle`, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+    })
+    chargerArticles();
     monter(
         popup(
             'Succès', 
-            `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`
+            `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`,
     ));
 }

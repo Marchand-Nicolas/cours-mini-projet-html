@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Fractales</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/accueil.css">
 
@@ -30,9 +31,9 @@
             Ajouter votre article
         </h1>
         <form onsubmit="ajouterArticle(event)" class="articleForm">
-            <input placeholder="Nom" type="text"></input>
-            <textarea placeholder="Description"></textarea>
-            <textarea placeholder="Contenu HTML"></textarea>
+            <input id="formArticleTitre" placeholder="Titre" type="text"></input>
+            <textarea id="formArticleDescription" placeholder="Description"></textarea>
+            <textarea id="formArticleContenu" placeholder="Contenu HTML"></textarea>
             <input name="image" id="image" type="file"></input>
             <!-- Il n'est pas vraiment possible de styler un input de type file en css,
                 c'est pourquoi l'on le rend invisible et l'on place un label par-dessus -->
