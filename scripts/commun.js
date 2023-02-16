@@ -1,10 +1,17 @@
 const head = document.querySelector('head');
 const body = document.querySelector('body');
 
+const path = window.location.pathname;
+const relativePath = path === '/' || path.endsWith('index.html') ? './' : '../';
+
+const config = {
+  api: "http://localhost:8000"
+}
+
 // Charger les éléments de base (navbar, footer, etc.)
 const navbar = document.createElement('nav');
 navbar.innerHTML = `
-<a href="/">
+<a href="${relativePath}index.html">
 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
 </svg>
@@ -18,17 +25,13 @@ body.appendChild(footer);
 // Charger les autres scripts et composants utiles :
 const fonctions = {
   utils: ['chargerStyle', 'monter'],
-  composants: ['popup'],
-  pages: ['accueil']
+  composants: ['popup']
 }
 fonctions.utils.forEach(util => {
-  chargerScript(`scripts/utils/${util}.js`);
+  chargerScript(`${relativePath}scripts/utils/${util}.js`);
 });
 fonctions.composants.forEach(composant => {
-  chargerScript(`scripts/composants/${composant}.js`);
-});
-fonctions.pages.forEach(page => {
-  chargerScript(`scripts/pages/${page}.js`);
+  chargerScript(`${relativePath}scripts/composants/${composant}.js`);
 });
 
 function chargerScript(src) {

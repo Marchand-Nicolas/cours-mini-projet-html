@@ -9,6 +9,6 @@ function monter(composant) {
     body.appendChild(container);
   }
   container.innerHTML = composant.html;
-  if (composant.style) chargerStyle(`styles/composants/${composant.nom}.css`);
+  if (composant.style) chargerStyle(`${relativePath}styles/composants/${composant.nom}.css`);
   if (composant.script) return composant.script(container);
 }

@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
 }
 
-.pave h1 {
+.pave h1, .pave p {
   background-color: rgba(0, 0, 0, 0.708);
   color: white;
   width: fit-content;

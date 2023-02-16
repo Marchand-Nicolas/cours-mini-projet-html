@@ -1,5 +1,3 @@
-const api = "http://localhost:8000"
-
 const articles = [
     {
         titre: "Les Fractales: Kesquecé?",
@@ -54,7 +52,7 @@ function ajouterArticle(e) {
         method: 'POST',
         body: formData
     };
-    fetch(`${api}/addArticle`, requestOptions)
+    fetch(`${config.api}/addArticle`, requestOptions)
     .then(response => response.json())
     .then(data => {
         console.log(data)
