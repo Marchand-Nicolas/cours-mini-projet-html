@@ -10,4 +10,5 @@ fetch(`${config.api}/getArticle?id=${articleId}`, requestOptions)
     document.getElementById('description').innerHTML = data.description;
     document.getElementById('contenu').innerHTML = data.contenu;
     document.getElementById('date').innerHTML = 'Publié le ' + new Date(data.date).toLocaleDateString();
+    document.getElementById('container').style.backgroundImage = `url(${config.api}/image/${data.image})`;  
   });
