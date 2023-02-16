@@ -1,4 +1,4 @@
-const articles = [
+const articlesParDefaut = [
     {
         titre: "Les Fractales: Kesquecé?",
         description: "Une figure fractale est un objet mathématique qui présente une structure similaire à toutes les échelles. C'est un objet géométrique « infiniment morcelé » dont des détails sont observables à une échelle arbitrairement choisie. En zoomant sur une partie de la figure, il est possible de retrouver toute la figure ; on dit alors qu’elle est « auto similaire ».",
@@ -16,14 +16,24 @@ const articles = [
     }
 ]
 
+const articles = [...articlesParDefaut]
+
 function chargerArticles() {
     const container = document.getElementById('articles')
     container.innerHTML = ''
     for (let index = 0; index < articles.length; index++) {
         const element = articles[index];
+        const image = element.type === 'custom' ?
+        `${config.api}/image/${element.image}`
+        :
+        `images/articles/${element.page}.jpg`
+        const page = element.type === 'custom' ?
+        `articles/custom.html?id=${element.id}`
+        :
+        `articles/${element.page}.html`
         container.innerHTML += `
-        <article style="background-image: url('images/articles/${element.page}.jpg')">
-            <a href="articles/${element.page}.html">
+        <article style="background-image: url('${image}')">
+            <a href="${page}">
                 <h1>${element.titre}</h1>
                 <p>
                     ${element.description}
@@ -34,6 +44,23 @@ function chargerArticles() {
     }
 }
 chargerArticles()
+
+function update() {
+    const requestOptions = {
+        method: 'GET',
+    };
+    fetch(`${config.api}/getArticles`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+        articles.splice(articlesParDefaut.length)
+        articles.push(...data.map((article) => ({
+            ...article,
+            type: 'custom'
+        })))
+        chargerArticles()
+    })
+}
+update()
 
 function ajouterArticle(e) {
     // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
@@ -55,12 +82,11 @@ function ajouterArticle(e) {
     fetch(`${config.api}/addArticle`, requestOptions)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
+        update()
+        monter(
+            popup(
+                'Succès', 
+                `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`,
+        ));
     })
-    chargerArticles();
-    monter(
-        popup(
-            'Succès', 
-            `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`,
-    ));
 }
