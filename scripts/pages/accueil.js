@@ -32,14 +32,14 @@ function chargerArticles() {
         :
         `articles/${element.page}.html`
         container.innerHTML += `
-        <article style="background-image: url('${image}')">
-            <a href="${page}">
+        <a class="articleLink" href="${page}">
+            <article style="background-image: url('${image}')">
                 <h1>${element.titre}</h1>
                 <p>
                     ${element.description}
                 </p>
-            </a>
-        </article>
+            </article>
+        </a>
         `
     }
 }
@@ -66,7 +66,6 @@ function ajouterArticle(e) {
     // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
     e.preventDefault();
 
-    const articleId = 2;
     const form = e.target
     const formData = new FormData(form)
     const titre = document.getElementById('formArticleTitre').value
@@ -86,7 +85,7 @@ function ajouterArticle(e) {
         monter(
             popup(
                 'Succès', 
-                `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${articleId}" target="_blank" rel="noreferrer">Afficher</a>`,
+                `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${data.id}" target="_blank" rel="noreferrer">Afficher</a>`,
         ));
     })
 }
