@@ -5,7 +5,7 @@ const path = window.location.pathname;
 const relativePath = path === '/' || path.endsWith('index.html') ? './' : '../';
 
 const config = {
-  api: "http://localhost:8000"
+  api: "http://158.101.204.28:8000"
 }
 
 // Charger les éléments de base (navbar, footer, etc.)
