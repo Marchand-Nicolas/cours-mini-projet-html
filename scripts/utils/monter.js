@@ -1,3 +1,4 @@
+// Monte un composant dans un container généré automatiquement
 function monter(composant) {
   const composantId = `composant-${composant.nom}`;
   const containerId = `container-${composantId}`;
@@ -9,7 +10,7 @@ function monter(composant) {
     body.appendChild(container);
   }
   container.innerHTML = composant.html;
-  if (composant.style) chargerStyle(`${relativePath}styles/composants/${composant.nom}.css`);
+  if (composant.style) chargerStyle(`${relativePath}styles/composants/${composant.nom}.css`); // Charger le fichier CSS du composant
   if (composant.script) composant.script(container);
   return container
 }

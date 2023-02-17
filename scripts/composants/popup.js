@@ -12,6 +12,7 @@ function popup(message, contenu) {
     style: true,
     nom: 'popup',
     script: (container) => {
+      // Ce script est exécuté après le chargement du composant. S'il était exécuté avant, le container n'existerait pas encore. C'est pourquoi il n'est pas écrit ci-dessus
       container.querySelector('.close').addEventListener('click', () => {
         container.remove();
       });

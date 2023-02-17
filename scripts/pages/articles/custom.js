@@ -1,3 +1,4 @@
+// Affiche un écran de chargement le temps de charger les données de l'article
 const screen = monter(loadingScreen());
 const params = new URLSearchParams(window.location.search);
 const articleId = params.get('id');
@@ -12,11 +13,14 @@ fetch(`${config.api}/getArticle?id=${articleId}`, requestOptions)
     document.getElementById('contenu').innerHTML = data.contenu;
     document.getElementById('date').innerHTML = 'Publié le ' + new Date(data.date).toLocaleDateString();
     document.getElementById('container').style.backgroundImage = `url(${config.api}/image/${data.image})`;
+    // Supprime l'écran de chargement
     screen.remove();
+    chargerCommentaires();
 });
 
 const chargerCommentaires = () => {
   const commentairesContainer = document.getElementById('commentaires');
+  monterDans(loading(), commentairesContainer);
   const requestOptions = {
     method: 'GET',
   };
@@ -44,7 +48,6 @@ const chargerCommentaires = () => {
       </div>`
     });
 };
-chargerCommentaires();
 
 const ajouterCommentaire = (e) => {
   e.preventDefault();

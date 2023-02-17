@@ -1,5 +1,4 @@
 function loadingScreen() {
-  const id = `random-id-${Math.random()}-loadingScreen`;
   const html = ``
 
   return {

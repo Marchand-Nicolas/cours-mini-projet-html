@@ -1,3 +1,4 @@
+// Fait bouger le bouton dès que la souris s'approche
 const relou = document.getElementById('relou');
 const width = 180;
 const height = 30;
