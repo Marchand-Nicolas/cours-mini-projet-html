@@ -1,8 +1,10 @@
 const head = document.querySelector('head');
 const body = document.querySelector('body');
+const html = document.querySelector('html');
 
 const path = window.location.pathname;
-const relativePath = path === '/' || path.endsWith('index.html') ? './' : '../';
+const accueil = path === '/' || path.endsWith('index.html')
+const relativePath = accueil ? './' : '../';
 
 const config = {
   api: "http://158.101.204.28:8000"
@@ -24,8 +26,9 @@ body.appendChild(footer);
 
 // Charger les autres scripts et composants utiles :
 const fonctions = {
-  utils: ['chargerStyle', 'monter'],
-  composants: ['popup']
+  utils: ['chargerStyle', 'monter', 'monterDans'],
+  composants: ['popup', 'loading', 'loadingScreen'],
+  pages: ['accueil', 'articles/custom']
 }
 fonctions.utils.forEach(util => {
   chargerScript(`${relativePath}scripts/utils/${util}.js`);
@@ -33,11 +36,17 @@ fonctions.utils.forEach(util => {
 fonctions.composants.forEach(composant => {
   chargerScript(`${relativePath}scripts/composants/${composant}.js`);
 });
+fonctions.pages.forEach(page => {
+  if (page === 'accueil' && accueil) {
+    chargerScript(`${relativePath}scripts/pages/${page}.js`);
+  }
+  else if (path.endsWith(`${page}.html`)) chargerScript(`${relativePath}scripts/pages/${page}.js`);
+});
 
 function chargerScript(src) {
   // Créer un élément <script> pour charger le fichier JS
   const script = document.createElement('script');
   script.src = src;
   script.type = 'text/javascript'
-  body.appendChild(script);
+  html.appendChild(script);
 }

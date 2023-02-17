@@ -10,5 +10,6 @@ function monter(composant) {
   }
   container.innerHTML = composant.html;
   if (composant.style) chargerStyle(`${relativePath}styles/composants/${composant.nom}.css`);
-  if (composant.script) return composant.script(container);
+  if (composant.script) composant.script(container);
+  return container
 }

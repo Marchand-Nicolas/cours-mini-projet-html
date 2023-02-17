@@ -1,4 +1,4 @@
-function popup (message, contenu) {
+function popup(message, contenu) {
   const html = `
   <div class="popup">
     <h2>${message}</h2>

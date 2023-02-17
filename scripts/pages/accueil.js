@@ -17,10 +17,10 @@ const articlesParDefaut = [
 ]
 
 const articles = [...articlesParDefaut]
+const articlesContainer = document.getElementById('articles')
 
 function chargerArticles() {
-    const container = document.getElementById('articles')
-    container.innerHTML = ''
+    articlesContainer.innerHTML = ''
     for (let index = 0; index < articles.length; index++) {
         const element = articles[index];
         const image = element.type === 'custom' ?
@@ -31,7 +31,7 @@ function chargerArticles() {
         `articles/custom.html?id=${element.id}`
         :
         `articles/${element.page}.html`
-        container.innerHTML += `
+        articlesContainer.innerHTML += `
         <a class="articleLink" href="${page}">
             <article style="background-image: url('${image}')">
                 <h1>${element.titre}</h1>
@@ -46,6 +46,7 @@ function chargerArticles() {
 chargerArticles()
 
 function update() {
+    monterDans(loadingScreen(), articlesContainer)
     const requestOptions = {
         method: 'GET',
     };
@@ -71,6 +72,14 @@ function ajouterArticle(e) {
     const titre = document.getElementById('formArticleTitre').value
     const description = document.getElementById('formArticleDescription').value
     const contenu = document.getElementById('formArticleContenu').value
+    
+    if (!titre || !description || !contenu) return monter(
+            popup(
+                'Erreur',
+                'Veuillez remplir tous les champs du formulaire.'
+            )
+        )
+
     formData.append("titre", titre)
     formData.append("description", description)
     formData.append("contenu", contenu)
@@ -78,6 +87,7 @@ function ajouterArticle(e) {
         method: 'POST',
         body: formData
     };
+    const screen = monter(loadingScreen());
     fetch(`${config.api}/addArticle`, requestOptions)
     .then(response => response.json())
     .then(data => {
@@ -87,5 +97,6 @@ function ajouterArticle(e) {
                 'Succès', 
                 `Votre article a bien été ajouté. <a class="link" href="articles/custom.html?id=${data.id}" target="_blank" rel="noreferrer">Afficher</a>`,
         ));
+        screen.remove()
     })
 }
