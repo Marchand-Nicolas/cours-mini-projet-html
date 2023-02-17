@@ -14,6 +14,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   color: #333;
+  overflow: overlay;
 }
 
 body.decal {
@@ -174,4 +175,22 @@ form {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+::selection {
+  background-color: var(--background);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  border: black 2px solid;
 }
