@@ -56,31 +56,6 @@ article p {
   font-size: 1.1em;
 }
 
-.articleForm input[type="text"],
-.articleForm textarea {
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  background-color: white;
-  color: black;
-}
-
-.articleForm input[type="submit"] {
-  margin-top: 15px;
-}
-
-.articleForm {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--background);
-  width: calc(100% - 50px);
-  padding: 25px;
-}
-
-.section {
-  padding: 25px;
-}
-
 .search {
   font-size: larger;
   width: 100%;

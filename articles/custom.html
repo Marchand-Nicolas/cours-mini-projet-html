@@ -15,6 +15,28 @@
     <hr>
     <p id="date"></p>
   </section>
+  <section class="section">
+    <h2>
+      Commentaires
+    </h2>
+    <div id="commentaires">
+      <!-- Générés automatiquement, voir scripts/pages/articles/custom.js -->
+      <div class="emptyContainer">
+        <p>
+          Aucun commentaire
+        </p>
+      </div>
+    </div>
+    <br>
+    <form onsubmit="ajouterCommentaire(event)">
+      <h2>
+        Ajouter un commentaire
+      </h2>
+      <input id="formCommentaireAuteur" placeholder="Auteur" type="text"></input>
+      <textarea id="formCommentaireContenu" placeholder="Contenu"></textarea>
+      <input class="bouton" type="submit" value="Ajouter"></input>
+    </form>
+  </section>
 </body>
 <script type="text/javascript" src="../scripts/commun.js"></script>
 </html>

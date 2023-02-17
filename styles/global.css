@@ -114,3 +114,45 @@ hr {
   margin: 25px 0;
   border: 1px solid black;
 }
+
+form input[type="text"],
+form textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  background-color: white;
+  color: black;
+}
+
+form input[type="submit"] {
+  margin-top: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background);
+  width: calc(100% - 50px);
+  padding: 25px;
+}
+
+.section {
+  padding: 25px;
+}
+
+.emptyContainer {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--background);
+}
+
+.flex {
+  display: flex;
+}
+
+.ml-1 {
+  margin-left: 10px;
+}
