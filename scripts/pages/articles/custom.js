@@ -54,6 +54,11 @@ const ajouterCommentaire = (e) => {
   const screen = monter(loadingScreen());
   const auteur = document.getElementById('formCommentaireAuteur').value;
   const contenu = document.getElementById('formCommentaireContenu').value;
+  if (auteur === '' || contenu === '') {
+    screen.remove();
+    monter(popup('Erreur', 'Veuillez remplir tous les champs'));
+    return;
+  }
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
