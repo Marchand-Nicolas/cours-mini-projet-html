@@ -17,6 +17,23 @@ body {
   overflow: overlay;
 }
 
+.titre {
+  color: white;
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+    1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: white;
+  background-color: var(--background);
+  width: fit-content;
+  font-size: 3rem;
+}
+
 body.decal {
   padding-top: 80px;
 }
