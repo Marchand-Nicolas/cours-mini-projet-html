@@ -17,9 +17,10 @@
         <h1>
             Articles
         </h1>
-
-        <br><label for="site-search"> <h3>Rechercher un article: </h3></label>
-        <input type="search" id="article-search" name="q" class="search">
+        <label for="site-search">
+            <h3>Rechercher un article: </h3>
+        </label>
+        <input placeholder="écrivez quelque chose..." type="search" id="article-search" name="q" class="search">
         <br> <br>
 
         <div id="articles">
@@ -27,10 +28,10 @@
         </div>
     </section>
     <section class="section">
-        <h1>
-            Ajouter votre article
-        </h1>
         <form onsubmit="ajouterArticle(event)" class="articleForm">
+            <h1>
+                Ajouter un article
+            </h1>
             <input id="formArticleTitre" placeholder="Titre" type="text"></input>
             <textarea id="formArticleDescription" placeholder="Description"></textarea>
             <textarea id="formArticleContenu" placeholder="Contenu HTML"></textarea>

@@ -1,70 +1,88 @@
 #articles {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -10px;
-    padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+  padding: 0;
 }
 
-.articleLink, .articleLink * {
-    text-decoration: none;
+.articleLink,
+.articleLink * {
+  text-decoration: none;
 }
 
 .articleLink {
-    width: 100%;
+  flex: 1 1 300px;
+  max-height: 250px;
+  overflow: hidden;
 }
 
 article {
-    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
-    transition: 0.2s;
-    padding: 25px;
-    margin: 10px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  border: 1px solid var(--background);
+  padding: 25px;
+  margin: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-article:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transition: 0.2s;
-    transform: translateY(-7px);
+article,
+article * {
+  transition: 0.2s;
 }
 
 article h1,
 article p {
-    background-color: rgba(0, 0, 0, 0.708);
-    color: white;
-    width: fit-content;
+  background-color: rgba(0, 0, 0, 0.708);
+  color: white;
+  width: fit-content;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+article:hover {
+  transform: translateY(-7px);
+}
+
+article:hover h1,
+article:hover p {
+  background-color: black;
 }
 
 article h1 {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 article p {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
-.articleForm input[type='text'], .articleForm textarea {
-    margin: 10px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 7px;
-    background-color: white;
-    color: black;
+.articleForm input[type="text"],
+.articleForm textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  background-color: white;
+  color: black;
 }
 
-.articleForm input[type='submit'] {
-    margin-top: 15px;
+.articleForm input[type="submit"] {
+  margin-top: 15px;
 }
 
 .articleForm {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
-    width: calc(100% - 50px);
-    padding: 25px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--background);
+  width: calc(100% - 50px);
+  padding: 25px;
 }
 
 .section {
-    padding: 25px;
+  padding: 25px;
+}
+
+.search {
+  font-size: larger;
+  width: 100%;
+  padding: 15px;
 }

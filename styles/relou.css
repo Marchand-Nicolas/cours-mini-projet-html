@@ -1,11 +1,10 @@
 #relou {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: none;
-    border-radius: 7px;
-    background-color: white;
-    color: black;
-    transition: 0.3s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background-color: white;
+  color: black;
+  transition: 0.3s;
 }

@@ -105,13 +105,12 @@ input[type="file"] + label {
   color: var(--background);
 }
 
-.search {
-  font-size: larger;
-  border-radius: 10px;
-  width: 450px;
-}
-
 .link {
   text-decoration: none;
   color: var(--couleur-primaire);
+}
+
+hr {
+  margin: 25px 0;
+  border: 1px solid black;
 }
