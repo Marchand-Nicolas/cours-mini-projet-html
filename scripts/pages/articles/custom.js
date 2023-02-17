@@ -36,12 +36,19 @@ const chargerCommentaires = () => {
         </div>
         `;
       }
+      if (data.length === 0) commentairesContainer.innerHTML = `
+      <div class="emptyContainer">
+        <p>
+          Aucun commentaire
+        </p>
+      </div>`
     });
 };
 chargerCommentaires();
 
 const ajouterCommentaire = (e) => {
   e.preventDefault();
+  const screen = monter(loadingScreen());
   const auteur = document.getElementById('formCommentaireAuteur').value;
   const contenu = document.getElementById('formCommentaireContenu').value;
   const requestOptions = {
@@ -52,6 +59,8 @@ const ajouterCommentaire = (e) => {
   fetch(`${config.api}/addCommentaire`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
+      document.getElementById('formCommentaireContenu').value = '';
       chargerCommentaires();
+      screen.remove();
     });
 };
