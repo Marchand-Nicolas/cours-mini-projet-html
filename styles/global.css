@@ -112,7 +112,9 @@ iframe {
 }
 
 .bouton.danger {
-  background-color: #a12525;
+  background-color: transparent;
+  border: #a12525 1px solid;
+  color: #a12525;
 }
 
 input[type="file"] {
