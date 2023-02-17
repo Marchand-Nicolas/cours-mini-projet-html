@@ -93,6 +93,10 @@ iframe {
   cursor: pointer;
 }
 
+.bouton.danger {
+  background-color: #a12525;
+}
+
 input[type="file"] {
   display: none;
 }
@@ -155,4 +159,19 @@ form {
 
 .ml-1 {
   margin-left: 10px;
+}
+
+.my-1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.full {
+  width: 100%;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

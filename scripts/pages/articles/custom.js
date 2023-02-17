@@ -67,3 +67,17 @@ const ajouterCommentaire = (e) => {
       screen.remove();
     });
 };
+
+const supprimerArticle = () => {
+  const screen = monter(loadingScreen());
+  const requestOptions = {
+    method: 'DELETE',
+    body: JSON.stringify({ id: articleId }),
+  };
+  fetch(`${config.api}/deleteArticle`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      screen.remove();
+      window.location.href = `${relativePath}index.html`;
+    });
+}
