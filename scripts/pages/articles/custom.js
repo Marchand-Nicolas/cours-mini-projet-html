@@ -56,7 +56,7 @@ const ajouterCommentaire = (e) => {
   const contenu = document.getElementById('formCommentaireContenu').value;
   if (auteur === '' || contenu === '') {
     screen.remove();
-    monter(popup('Erreur', 'Veuillez remplir tous les champs'));
+    monter(popup('Erreur', 'Veuillez remplir tous les champs du formulaire.'));
     return;
   }
   const requestOptions = {
