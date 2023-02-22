@@ -10,7 +10,7 @@ const path = window.location.pathname;
 const accueil = path === '/' || path.endsWith('index.html')
 const relativePath = accueil ? './' : '../';
 const config = {
-  api: "https://mini-projet-api.nico-best-pc-ever.ovh/" // Addresse de l'api. 
+  api: "https://mini-projet-api.nico-best-pc-ever.ovh" // Addresse de l'api. 
 }
 
 // Charger les éléments de base (navbar, footer, etc.)
