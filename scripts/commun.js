@@ -10,7 +10,7 @@ const path = window.location.pathname;
 const accueil = path === '/' || path.endsWith('index.html')
 const relativePath = accueil ? './' : '../';
 const config = {
-  api: "http://158.101.204.28:8000" // L'adresse de l'API (une IP statique). Le serveur n'étant pas local, les données sont partagées entre tous les utilisateurs. Cela signifie que quand vous ajoutez un articles, tous les autres le voient.
+  api: "https://mini-projet-api.nico-best-pc-ever.ovh/" // Addresse de l'api. 
 }
 
 // Charger les éléments de base (navbar, footer, etc.)
@@ -35,18 +35,18 @@ const fonctions = {
 }
 // 1. Charger les utiles
 // 2. Charger les composants
-  // Un composant est un objet qui contient les propriétés suivantes :
-  // - nom: le nom du composant (utilisé pour le nom du fichier CSS et pour l'ID du container)
-  // - html: le code HTML du composant
-  // - style: un booléen indiquant si le composant a un fichier CSS associé
-  // - script: une fonction qui sera exécutée après le chargement du composant
-  // Le composant est renvoyé par une fonction composant
-  // L'objet composant est ensuite utilisé par la fonction monter ou monterDans pour afficher le composant à l'écran
-  // L'objectif de ce système est de pouvoir coder des petites briques réutilisables un peu partout. De plus, les ressources du composant ne seront chargées qu'au moment où le composant est affiché (images, fichiers css etc...)
-  // Un composant peut être utilisé dans une page ou dans un autre composant
-  // Exemple d'utilisation :
-  // const popup = composantPopup('Mon titre', 'Mon contenu');
-  // monter(popup);
+// Un composant est un objet qui contient les propriétés suivantes :
+// - nom: le nom du composant (utilisé pour le nom du fichier CSS et pour l'ID du container)
+// - html: le code HTML du composant
+// - style: un booléen indiquant si le composant a un fichier CSS associé
+// - script: une fonction qui sera exécutée après le chargement du composant
+// Le composant est renvoyé par une fonction composant
+// L'objet composant est ensuite utilisé par la fonction monter ou monterDans pour afficher le composant à l'écran
+// L'objectif de ce système est de pouvoir coder des petites briques réutilisables un peu partout. De plus, les ressources du composant ne seront chargées qu'au moment où le composant est affiché (images, fichiers css etc...)
+// Un composant peut être utilisé dans une page ou dans un autre composant
+// Exemple d'utilisation :
+// const popup = composantPopup('Mon titre', 'Mon contenu');
+// monter(popup);
 fonctions.utils.forEach(util => {
   chargerScript(`${relativePath}scripts/utils/${util}.js`);
 });
