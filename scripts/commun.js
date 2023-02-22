@@ -10,7 +10,7 @@ const path = window.location.pathname;
 const accueil = path === '/' || path.endsWith('index.html')
 const relativePath = accueil ? './' : '../';
 const config = {
-  api: "http://158.101.204.28:8000" // L'adresse de l'API (une IP statique). Le serveur n'étant pas local, les données sont partagées entre tous les utilisateurs. Cela signifique que quand vous ajoutez un articles, tous les autres le voient.
+  api: "http://158.101.204.28:8000" // L'adresse de l'API (une IP statique). Le serveur n'étant pas local, les données sont partagées entre tous les utilisateurs. Cela signifie que quand vous ajoutez un articles, tous les autres le voient.
 }
 
 // Charger les éléments de base (navbar, footer, etc.)
