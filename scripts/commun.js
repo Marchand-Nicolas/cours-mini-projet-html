@@ -1,3 +1,11 @@
+addEventListener("error", (e) => {
+  console.log(e);
+  alert("Une erreur est survenue. Veuillez actualiser la page.");
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+});
+
 // Ce fichier est commun à toutes les pages du site
 // Il permet de charger les fonctions utiles, les composants, ainsi que le script de la page actuelle
 // Il est nécessaire de passer par ce fichier pour charger le script de la page car le script de la page doit être chargé après les autres scripts (car il peut utiliser les fonctions et composants chargés par ce fichier)
@@ -71,11 +79,3 @@ function chargerScript(src) {
   script.type = "text/javascript";
   html.appendChild(script);
 }
-
-addEventListener("error", (e) => {
-  console.log(e);
-  alert("Une erreur est survenue. Veuillez actualiser la page.");
-  setTimeout(() => {
-    window.location.reload();
-  }, 1000);
-});
