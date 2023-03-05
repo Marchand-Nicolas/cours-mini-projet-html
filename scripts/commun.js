@@ -1,9 +1,5 @@
 addEventListener("error", (e) => {
-  console.log(e);
-  alert("Une erreur est survenue. Veuillez actualiser la page.");
-  setTimeout(() => {
-    window.location.reload();
-  }, 1000);
+  if (e.message.toLowerCase().includes("script")) window.location.reload();
 });
 
 // Ce fichier est commun à toutes les pages du site
@@ -60,16 +56,20 @@ const fonctions = {
 fonctions.utils.forEach((util) => {
   chargerScript(`${relativePath}scripts/utils/${util}.js`);
 });
-fonctions.composants.forEach((composant) => {
-  chargerScript(`${relativePath}scripts/composants/${composant}.js`);
-});
-fonctions.pages.forEach((page) => {
-  // La page d'accueil peut être / ou /index.html (en fonction de le site est hébergé sur un serveur ou non), donc elle doit être traitée séparément
-  if (page === "accueil" && accueil) {
-    chargerScript(`${relativePath}scripts/pages/${page}.js`);
-  } else if (path.endsWith(`${page}.html`))
-    chargerScript(`${relativePath}scripts/pages/${page}.js`);
-});
+setTimeout(() => {
+  fonctions.composants.forEach((composant) => {
+    chargerScript(`${relativePath}scripts/composants/${composant}.js`);
+  });
+}, 100);
+setTimeout(() => {
+  fonctions.pages.forEach((page) => {
+    // La page d'accueil peut être / ou /index.html (en fonction de le site est hébergé sur un serveur ou non), donc elle doit être traitée séparément
+    if (page === "accueil" && accueil) {
+      chargerScript(`${relativePath}scripts/pages/${page}.js`);
+    } else if (path.endsWith(`${page}.html`))
+      chargerScript(`${relativePath}scripts/pages/${page}.js`);
+  });
+}, 100);
 
 function chargerScript(src) {
   // Créer un élément <script> pour charger le fichier JS
