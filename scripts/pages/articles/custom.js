@@ -3,7 +3,7 @@ const screen = monter(loadingScreen());
 const params = new URLSearchParams(window.location.search);
 const articleId = params.get("id");
 request(`${config.api}/getArticle?id=${articleId}`, { method: "GET" }).then(
-  (data) => {
+  async (data) => {
     if (data.author !== userObject.id) {
       const deleteArticleSection = document.getElementById(
         "deleteArticleSection"
@@ -22,14 +22,23 @@ request(`${config.api}/getArticle?id=${articleId}`, { method: "GET" }).then(
         })
       );
     }
+    const author = await getUser(data.author);
     document.getElementById("titre").innerHTML = data.titre;
     document.getElementById("description").innerHTML = data.description;
     document.getElementById("contenu").innerHTML = data.contenu;
-    document.getElementById("date").innerHTML =
-      "Publié le " + new Date(data.date).toLocaleDateString();
+    document.getElementById("date").innerHTML = `
+    <div id="articleAuthorAvatarContainer"></div>
+    <p class="ml-1">
+    Publié le ${new Date(data.date).toLocaleDateString()} par ${author.username}
+    </p>
+    `;
     document.getElementById(
       "container"
     ).style.backgroundImage = `url(${config.api}/image/${data.image})`;
+    monterDans(
+      avatar({ customAvatarURL: author.avatar, width: 40 }),
+      document.getElementById("articleAuthorAvatarContainer")
+    );
     // Supprime l'écran de chargement
     screen.remove();
     chargerCommentaires();
@@ -66,7 +75,7 @@ const chargerCommentaires = () => {
         </div>
         `;
       monterDans(
-        avatar({ customAvatarURL: user.avatar, width: 50 }),
+        avatar({ customAvatarURL: user.avatar, width: 40 }),
         document.getElementById(`avatar-commentaire-${element.id}`)
       );
     }

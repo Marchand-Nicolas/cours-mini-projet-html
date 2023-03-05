@@ -3,11 +3,15 @@ function avatar({ customAvatarURL, width } = {}) {
     ? customAvatarURL.startsWith("http")
       ? customAvatarURL
       : config.api + "/image/" + customAvatarURL
-    : config.api + "/image/" + userObject.avatar;
+    : userObject.avatar
+    ? config.api + "/image/" + userObject.avatar
+    : undefined;
 
   const html = `
     <img style="width: ${width || 100}px" src="${
-    avatarURL ? avatarURL : relativePath + "images/avatar.png"
+    customAvatarURL !== null && avatarURL
+      ? avatarURL
+      : relativePath + "images/avatar.png"
   }" class="avatar" alt="avatar" />
   `;
 
