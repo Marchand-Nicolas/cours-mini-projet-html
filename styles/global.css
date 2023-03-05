@@ -213,3 +213,9 @@ form {
   background: white;
   border: black 2px solid;
 }
+
+.highlight {
+  background-color: rgb(196, 151, 0);
+  font-size: 1.4em;
+  font-weight: 700;
+}
