@@ -1,6 +1,6 @@
 async function getUser(userId) {
   const cachedUser = getCachedData(`user-${userId}`);
-  if (cachedUser) return JSON.parse(cachedUser);
+  if (cachedUser) return cachedUser;
   const user = await request(`${config.api}/getUser?userId=${userId}`, {
     method: "GET",
   });

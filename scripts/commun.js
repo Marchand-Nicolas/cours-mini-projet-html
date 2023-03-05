@@ -71,3 +71,7 @@ function chargerScript(src) {
   script.type = "text/javascript";
   html.appendChild(script);
 }
+
+addEventListener("error", (e) => {
+  console.log(e);
+});

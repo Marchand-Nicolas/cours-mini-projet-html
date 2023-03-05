@@ -20,7 +20,7 @@ function connexion(e) {
     }
     screen.remove();
     // Mettre les données de l'utilisateur en cache
-    window.localStorage.setItem("user", JSON.stringify(response));
+    cacheData("user", response, 7);
     const redirect = new URLSearchParams(window.location.search).get(
       "redirect"
     );

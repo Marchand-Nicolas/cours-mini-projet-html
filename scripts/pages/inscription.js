@@ -34,17 +34,13 @@ function inscription(e) {
     method: "POST",
     body: { username, password },
   }).then((response) => {
-    console.log(response);
     screen.remove();
-    if (response.error) {
-      monter(popup("Erreur", response.error));
-      return;
-    }
+    if (!response) return;
     monter(
       popup("Succès", "Votre compte a bien été créé.", {
         buttonText: "Se connecter",
         action: () => {
-          window.location.href = "./profile.html";
+          window.location.href = "./connexion.html?redirect=profile.html";
         },
       })
     );

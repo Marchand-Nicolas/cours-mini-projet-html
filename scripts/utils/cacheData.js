@@ -1,5 +1,5 @@
-function cacheData(key, data, expirationDays = 1) {
+function cacheData(key, data, expirationDays = 0.01) {
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + expirationDays);
-  localStorage.setItem("data", JSON.stringify({ data, expirationDate }));
+  localStorage.setItem(key, JSON.stringify({ data, expirationDate }));
 }

@@ -116,6 +116,12 @@ iframe {
   cursor: pointer;
 }
 
+.bouton.outline {
+  background-color: transparent;
+  border: var(--background) 1px solid;
+  color: var(--background);
+}
+
 .bouton.danger {
   background-color: transparent;
   border: #a12525 1px solid;
@@ -197,6 +203,10 @@ form {
 
 .ml-2 {
   margin-left: 20px;
+}
+
+.mt-1 {
+  margin-top: 10px;
 }
 
 .my-1 {

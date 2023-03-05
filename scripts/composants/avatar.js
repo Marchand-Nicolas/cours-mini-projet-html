@@ -3,7 +3,7 @@ function avatar({ customAvatarURL, width } = {}) {
     ? customAvatarURL.startsWith("http")
       ? customAvatarURL
       : config.api + "/image/" + customAvatarURL
-    : userObject.avatarURL;
+    : config.api + "/image/" + userObject.avatar;
 
   const html = `
     <img style="width: ${width || 100}px" src="${

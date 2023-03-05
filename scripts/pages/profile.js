@@ -1,3 +1,5 @@
+checkUserLoggedIn(true);
+
 const usernameElement = document.getElementById("username");
 const avatarContainer = document.getElementById("avatarContainer");
 
@@ -28,9 +30,14 @@ function updateProfile(e) {
         for (let i = 0; i < keys.length; i++) {
           userObject[keys[i]] = data.user[keys[i]];
         }
-        setCookie("user", JSON.stringify(userObject), 7);
+        cacheData("user", userObject, 7);
         screen.remove();
         window.location.reload();
       }
     });
+}
+
+function logout() {
+  localStorage.clear();
+  window.location.href = "./index.html";
 }

@@ -1,15 +1,9 @@
 // Chargement des éléments de base (navbar, footer, etc.)
 
 // Récupérer les données de l'utilisateur mises en cache
-const user = window.localStorage.getItem("user");
+let userObject = getCachedData("user") || {};
 
-// Decoder %20, %3A, etc.
-const decodedUser = decodeURIComponent(user);
-// Convertir la chaîne de caractères en objets
-let userObject =
-  decodedUser && decodedUser !== "undefined"
-    ? JSON.parse(decodedUser) || {}
-    : {};
+console.log(userObject);
 
 if (userObject.username) {
   // Mettre à jour les données de l'utilisateur mises en cache (au cas où elles aient été modifiées sur un autre appareil)
@@ -18,12 +12,9 @@ if (userObject.username) {
     body: { username: userObject.username, password: userObject.password },
   }).then((response) => {
     // Mettre les données de l'utilisateur en cache
-    window.localStorage.setItem("user", JSON.stringify(response));
-    userObject = response;
+    if (response) cacheData("user", response, 7);
   });
 }
-
-console.log(userObject);
 
 // Charger les éléments de base (navbar, footer, etc.)
 const navbar = document.createElement("nav");
