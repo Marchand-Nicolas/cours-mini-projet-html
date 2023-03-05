@@ -22,13 +22,13 @@ const config = {
 // Charger les autres scripts et composants utiles :
 const fonctions = {
   utils: [
+    "cacheData",
+    "getCachedData",
     "request",
     "chargerStyle",
     "monter",
     "monterDans",
     "base",
-    "cacheData",
-    "getCachedData",
     "checkUserLoggedIn",
     "getUser",
   ],
@@ -74,4 +74,8 @@ function chargerScript(src) {
 
 addEventListener("error", (e) => {
   console.log(e);
+  alert("Une erreur est survenue. Veuillez actualiser la page.");
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
 });
