@@ -1,3 +1,4 @@
+// Appelle la fonction fetch en gérant les erreurs (raccourci)
 async function request(url, { method, body }) {
   try {
     const requestOptions = {
