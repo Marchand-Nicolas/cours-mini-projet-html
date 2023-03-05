@@ -23,6 +23,27 @@ const articlesDynamiques = [];
 let articles = [...articlesParDefaut];
 const articlesContainer = document.getElementById("articles");
 
+const params = {
+  q: "",
+};
+
+const urlParams = new URLSearchParams(window.location.search);
+const query = urlParams.get("q");
+let filtre = query || "";
+document.getElementById("article-search").value = filtre;
+
+function updateParams() {
+  const url = new URL(window.location.href);
+  const keys = Object.keys(params);
+  for (let index = 0; index < keys.length; index++) {
+    const key = keys[index];
+    const value = params[key];
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
+  window.history.pushState({}, "", url);
+}
+
 function chargerArticles() {
   articlesContainer.innerHTML = "";
   for (let index = 0; index < articles.length; index++) {
@@ -58,17 +79,20 @@ function chargerArticles() {
 function rechercherArticles(e) {
   // Quand l'utilisateur tape dans la barre de recherche
   const texte = e.target.value;
-  filtrerArticles(texte);
+  filtre = texte;
+  filtrerArticles();
+  params.q = texte;
+  updateParams();
 }
 
-function filtrerArticles(texte) {
-  if (!texte) {
+function filtrerArticles() {
+  if (!filtre) {
     articles = [...articlesParDefaut, ...articlesDynamiques];
   } else {
     articles = [...articlesParDefaut, ...articlesDynamiques].filter(
       (article) =>
-        article.titre.toLowerCase().includes(texte.toLowerCase()) ||
-        article.description.toLowerCase().includes(texte.toLowerCase())
+        article.titre.toLowerCase().includes(filtre.toLowerCase()) ||
+        article.description.toLowerCase().includes(filtre.toLowerCase())
     );
     const copie = articles.map((article) => ({ ...article }));
     // Surligner le texte recherché sans prendre en compte les majuscules
@@ -77,8 +101,8 @@ function filtrerArticles(texte) {
       const titre = article.titre.toLowerCase();
       const description = article.description.toLowerCase();
       // Trouver l'index du texte recherché dans le titre et la description
-      const indexTitre = titre.indexOf(texte.toLowerCase());
-      const indexDescription = description.indexOf(texte.toLowerCase());
+      const indexTitre = titre.indexOf(filtre.toLowerCase());
+      const indexDescription = description.indexOf(filtre.toLowerCase());
       if (indexTitre !== -1) {
         // Surligner le texte recherché
         copie[index].titre = `${article.titre.slice(
@@ -86,8 +110,8 @@ function filtrerArticles(texte) {
           indexTitre
         )}<span class="highlight">${article.titre.slice(
           indexTitre,
-          indexTitre + texte.length
-        )}</span>${article.titre.slice(indexTitre + texte.length)}`;
+          indexTitre + filtre.length
+        )}</span>${article.titre.slice(indexTitre + filtre.length)}`;
       }
       if (indexDescription !== -1) {
         copie[index].description = `${article.description.slice(
@@ -95,8 +119,10 @@ function filtrerArticles(texte) {
           indexDescription
         )}<span class="highlight">${article.description.slice(
           indexDescription,
-          indexDescription + texte.length
-        )}</span>${article.description.slice(indexDescription + texte.length)}`;
+          indexDescription + filtre.length
+        )}</span>${article.description.slice(
+          indexDescription + filtre.length
+        )}`;
       }
     }
     articles = copie;
@@ -104,7 +130,7 @@ function filtrerArticles(texte) {
   chargerArticles();
 }
 
-function update() {
+function getArticles() {
   monterDans(loadingScreen(), articlesContainer);
   request(`${config.api}/getArticles`, { method: "GET" }).then((data) => {
     // Supprimer tous les articles dynamiques
@@ -116,10 +142,10 @@ function update() {
         type: "custom",
       }))
     );
-    filtrerArticles("");
+    filtrerArticles();
   });
 }
-update();
+getArticles();
 
 function ajouterArticle(e) {
   // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
@@ -150,7 +176,7 @@ function ajouterArticle(e) {
   fetch(`${config.api}/addArticle`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      update();
+      getArticles();
       monter(
         popup(
           "Succès",
