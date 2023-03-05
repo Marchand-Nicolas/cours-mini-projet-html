@@ -3,18 +3,18 @@
 // Il est nécessaire de passer par ce fichier pour charger le script de la page car le script de la page doit être chargé après les autres scripts (car il peut utiliser les fonctions et composants chargés par ce fichier)
 
 // Variables globales
-const head = document.querySelector('head');
-const body = document.querySelector('body');
-const html = document.querySelector('html');
+const head = document.querySelector("head");
+const body = document.querySelector("body");
+const html = document.querySelector("html");
 const path = window.location.pathname;
-const accueil = path === '/' || path.endsWith('index.html')
-const relativePath = accueil ? './' : '../';
+const accueil = path === "/" || path.endsWith("index.html");
+const relativePath = accueil ? "./" : "../";
 const config = {
-  api: "https://mini-projet-api.nico-best-pc-ever.ovh" // Addresse de l'api. 
-}
+  api: "https://mini-projet-api.nico-best-pc-ever.ovh", // Addresse de l'api.
+};
 
 // Charger les éléments de base (navbar, footer, etc.)
-const navbar = document.createElement('nav');
+const navbar = document.createElement("nav");
 navbar.innerHTML = `
 <a href="${relativePath}index.html">
 <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -23,16 +23,16 @@ navbar.innerHTML = `
 Accueil</a>
 `;
 body.prepend(navbar);
-const footer = document.createElement('footer');
-footer.innerHTML = '© 2022 - 2023 - Tous droits réservés';
+const footer = document.createElement("footer");
+footer.innerHTML = "© 2022 - 2023 - Tous droits réservés";
 body.appendChild(footer);
 
 // Charger les autres scripts et composants utiles :
 const fonctions = {
-  utils: ['chargerStyle', 'monter', 'monterDans'],
-  composants: ['popup', 'loading', 'loadingScreen'],
-  pages: ['accueil', 'articles/custom']
-}
+  utils: ["request", "chargerStyle", "monter", "monterDans"],
+  composants: ["popup", "loading", "loadingScreen"],
+  pages: ["accueil", "articles/custom"],
+};
 // 1. Charger les utiles
 // 2. Charger les composants
 // Un composant est un objet qui contient les propriétés suivantes :
@@ -47,25 +47,25 @@ const fonctions = {
 // Exemple d'utilisation :
 // const popup = composantPopup('Mon titre', 'Mon contenu');
 // monter(popup);
-fonctions.utils.forEach(util => {
+fonctions.utils.forEach((util) => {
   chargerScript(`${relativePath}scripts/utils/${util}.js`);
 });
-fonctions.composants.forEach(composant => {
+fonctions.composants.forEach((composant) => {
   chargerScript(`${relativePath}scripts/composants/${composant}.js`);
 });
-fonctions.pages.forEach(page => {
+fonctions.pages.forEach((page) => {
   // La page d'accueil peut être / ou /index.html (en fonction de le site est hébergé sur un serveur ou non), donc elle doit être traitée séparément
-  if (page === 'accueil' && accueil) {
+  if (page === "accueil" && accueil) {
     chargerScript(`${relativePath}scripts/pages/${page}.js`);
-  }
-  else if (path.endsWith(`${page}.html`)) chargerScript(`${relativePath}scripts/pages/${page}.js`);
+  } else if (path.endsWith(`${page}.html`))
+    chargerScript(`${relativePath}scripts/pages/${page}.js`);
 });
 
 function chargerScript(src) {
   // Créer un élément <script> pour charger le fichier JS
   // C'est la seule fonction utile directement écrite dans le code. Les autres sont chargées par celle-ci
-  const script = document.createElement('script');
+  const script = document.createElement("script");
   script.src = src;
-  script.type = 'text/javascript'
+  script.type = "text/javascript";
   html.appendChild(script);
 }

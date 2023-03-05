@@ -1,36 +1,45 @@
 // Affiche un écran de chargement le temps de charger les données de l'article
 const screen = monter(loadingScreen());
 const params = new URLSearchParams(window.location.search);
-const articleId = params.get('id');
-const requestOptions = {
-  method: 'GET',
-};
-fetch(`${config.api}/getArticle?id=${articleId}`, requestOptions)
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('titre').innerHTML = data.titre;
-    document.getElementById('description').innerHTML = data.description;
-    document.getElementById('contenu').innerHTML = data.contenu;
-    document.getElementById('date').innerHTML = 'Publié le ' + new Date(data.date).toLocaleDateString();
-    document.getElementById('container').style.backgroundImage = `url(${config.api}/image/${data.image})`;
+const articleId = params.get("id");
+request(`${config.api}/getArticle?id=${articleId}`, { method: "GET" }).then(
+  (data) => {
+    if (data.empty) {
+      // Si l'article n'existe pas, affiche un message d'erreur
+      screen.remove();
+      return monter(
+        popup("Erreur", "Cet article n'existe pas ou a été supprimé.", {
+          buttonText: "Retourner à l'accueil",
+          action: () => {
+            window.location.href = "../index.html";
+          },
+        })
+      );
+    }
+    document.getElementById("titre").innerHTML = data.titre;
+    document.getElementById("description").innerHTML = data.description;
+    document.getElementById("contenu").innerHTML = data.contenu;
+    document.getElementById("date").innerHTML =
+      "Publié le " + new Date(data.date).toLocaleDateString();
+    document.getElementById(
+      "container"
+    ).style.backgroundImage = `url(${config.api}/image/${data.image})`;
     // Supprime l'écran de chargement
     screen.remove();
     chargerCommentaires();
-});
+  }
+);
 
 const chargerCommentaires = () => {
-  const commentairesContainer = document.getElementById('commentaires');
+  const commentairesContainer = document.getElementById("commentaires");
   monterDans(loading(), commentairesContainer);
-  const requestOptions = {
-    method: 'GET',
-  };
-  fetch(`${config.api}/getCommentaires?articleId=${articleId}`, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      commentairesContainer.innerHTML = '';
-      for (let index = 0; index < data.length; index++) {
-        const element = data[index];
-        commentairesContainer.innerHTML += `
+  request(`${config.api}/getCommentaires?articleId=${articleId}`, {
+    method: "GET",
+  }).then((data) => {
+    commentairesContainer.innerHTML = "";
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      commentairesContainer.innerHTML += `
         <div class="commentaire">
           <div class="flex">
             <h1>${element.auteur}</h1>
@@ -39,50 +48,48 @@ const chargerCommentaires = () => {
           <p>${element.contenu}</p>
         </div>
         `;
-      }
-      if (data.length === 0) commentairesContainer.innerHTML = `
+    }
+    if (data.length === 0)
+      commentairesContainer.innerHTML = `
       <div class="emptyContainer">
         <p>
           Aucun commentaire
         </p>
-      </div>`
-    });
+      </div>`;
+  });
 };
 
 const ajouterCommentaire = (e) => {
   e.preventDefault();
   const screen = monter(loadingScreen());
-  const auteur = document.getElementById('formCommentaireAuteur').value;
-  const contenu = document.getElementById('formCommentaireContenu').value;
-  if (auteur === '' || contenu === '') {
+  const auteur = document.getElementById("formCommentaireAuteur").value;
+  const contenu = document.getElementById("formCommentaireContenu").value;
+  if (auteur === "" || contenu === "") {
     screen.remove();
-    monter(popup('Erreur', 'Veuillez remplir tous les champs du formulaire.'));
+    monter(popup("Erreur", "Veuillez remplir tous les champs du formulaire."));
     return;
   }
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ auteur: auteur, contenu: contenu, articleId: articleId }),
-  };
-  fetch(`${config.api}/addCommentaire`, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById('formCommentaireContenu').value = '';
-      chargerCommentaires();
-      screen.remove();
-    });
+  request(`${config.api}/addCommentaire`, {
+    method: "POST",
+    body: {
+      auteur: auteur,
+      contenu: contenu,
+      articleId: articleId,
+    },
+  }).then((data) => {
+    document.getElementById("formCommentaireContenu").value = "";
+    chargerCommentaires();
+    screen.remove();
+  });
 };
 
 const supprimerArticle = () => {
   const screen = monter(loadingScreen());
-  const requestOptions = {
-    method: 'DELETE',
-    body: JSON.stringify({ id: articleId }),
-  };
-  fetch(`${config.api}/deleteArticle`, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      screen.remove();
-      window.location.href = `${relativePath}index.html`;
-    });
-}
+  request(`${config.api}/deleteArticle`, {
+    method: "DELETE",
+    body: { id: articleId },
+  }).then((data) => {
+    screen.remove();
+    window.location.href = `${relativePath}index.html`;
+  });
+};

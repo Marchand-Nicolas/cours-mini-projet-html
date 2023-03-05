@@ -106,23 +106,18 @@ function filtrerArticles(texte) {
 
 function update() {
   monterDans(loadingScreen(), articlesContainer);
-  const requestOptions = {
-    method: "GET",
-  };
-  fetch(`${config.api}/getArticles`, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      // Supprimer tous les articles dynamiques
-      articlesDynamiques.length = 0;
-      // Ajouter les articles dynamiques
-      articlesDynamiques.push(
-        ...data.map((article) => ({
-          ...article,
-          type: "custom",
-        }))
-      );
-      filtrerArticles("");
-    });
+  request(`${config.api}/getArticles`, { method: "GET" }).then((data) => {
+    // Supprimer tous les articles dynamiques
+    articlesDynamiques.length = 0;
+    // Ajouter les articles dynamiques
+    articlesDynamiques.push(
+      ...data.map((article) => ({
+        ...article,
+        type: "custom",
+      }))
+    );
+    filtrerArticles("");
+  });
 }
 update();
 
