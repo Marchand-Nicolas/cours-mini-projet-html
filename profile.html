@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="./styles/accueil.css" />
+  </head>
+  <body class="decal">
+    <section class="section">
+      <h1 class="subtitle">Profile</h1>
+      <div class="flex fit-content cent-vert">
+        <div id="avatarContainer"></div>
+        <h2 class="ml-2" id="username"></h2>
+      </div>
+    </section>
+    <section class="section">
+    <form onsubmit="updateProfile(event)">
+        <h1>
+            Mettre à jour votre profile
+        </h1>
+        <input name="image" id="image" type="file" accept="image/png, image/jpeg, image/webp"></input>
+        <label for="image">Importer une image</label>
+      <input class="bouton" type="submit" value="Mettre à jour"></input>
+    </form>
+    </section>
+  </body>
+  <script type="text/javascript" src="./scripts/commun.js"></script>
+</html>

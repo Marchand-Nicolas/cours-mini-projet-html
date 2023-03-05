@@ -61,7 +61,7 @@ header h1 {
 nav {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: calc(100% - 50px);
   display: flex;
   padding: 25px;
   justify-content: space-between;
@@ -81,6 +81,11 @@ nav a {
 nav svg {
   width: 30px;
   margin-right: 15px;
+}
+
+.nav .right {
+  margin-left: auto;
+  background-color: red;
 }
 
 footer {
@@ -140,6 +145,7 @@ hr {
 }
 
 form input[type="text"],
+form input[type="password"],
 form textarea {
   margin: 10px 0;
   padding: 10px;
@@ -177,8 +183,20 @@ form {
   display: flex;
 }
 
+.flex.cent-vert {
+  align-items: center;
+}
+
+.fit-content {
+  width: fit-content;
+}
+
 .ml-1 {
   margin-left: 10px;
+}
+
+.ml-2 {
+  margin-left: 20px;
 }
 
 .my-1 {
@@ -218,4 +236,17 @@ form {
   background-color: rgb(196, 151, 0);
   font-size: 1.4em;
   font-weight: 700;
+}
+
+.icon-1 {
+  width: 25px;
+  height: 25px;
+}
+
+.danger {
+  color: #a12525;
+}
+
+.pointer {
+  cursor: pointer;
 }

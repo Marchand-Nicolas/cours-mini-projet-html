@@ -8,30 +8,32 @@ const body = document.querySelector("body");
 const html = document.querySelector("html");
 const path = window.location.pathname;
 const accueil = path === "/" || path.endsWith("index.html");
-const relativePath = accueil ? "./" : "../";
+const basicURL =
+  accueil ||
+  path.endsWith("connexion.html") ||
+  path.endsWith("inscription.html") ||
+  path.endsWith("profile.html");
+const relativePath = basicURL ? "./" : "../";
 const config = {
-  api: "https://mini-projet-api.nico-best-pc-ever.ovh", // Addresse de l'api.
+  //api: "https://mini-projet-api.nico-best-pc-ever.ovh", // Addresse de l'api.,
+  api: "http://localhost:8000", // Addresse de l'api en local.
 };
-
-// Charger les éléments de base (navbar, footer, etc.)
-const navbar = document.createElement("nav");
-navbar.innerHTML = `
-<a href="${relativePath}index.html">
-<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-</svg>
-Accueil</a>
-`;
-body.prepend(navbar);
-const footer = document.createElement("footer");
-footer.innerHTML = "© 2022 - 2023 - Tous droits réservés";
-body.appendChild(footer);
 
 // Charger les autres scripts et composants utiles :
 const fonctions = {
-  utils: ["request", "chargerStyle", "monter", "monterDans"],
-  composants: ["popup", "loading", "loadingScreen"],
-  pages: ["accueil", "articles/custom"],
+  utils: [
+    "request",
+    "chargerStyle",
+    "monter",
+    "monterDans",
+    "base",
+    "cacheData",
+    "getCachedData",
+    "checkUserLoggedIn",
+    "getUser",
+  ],
+  composants: ["popup", "loading", "loadingScreen", "avatar"],
+  pages: ["accueil", "inscription", "connexion", "profile", "articles/custom"],
 };
 // 1. Charger les utiles
 // 2. Charger les composants

@@ -11,6 +11,10 @@ async function request(url, { method, body }) {
     const res = await fetch(url, requestOptions);
     try {
       const data = await res.json();
+      if (data.error) {
+        monter(popup("Erreur", data.error));
+        return;
+      }
       return data;
     } catch (e) {
       return {

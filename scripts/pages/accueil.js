@@ -150,6 +150,7 @@ getArticles();
 function ajouterArticle(e) {
   // Quand l'utilisateur rempli le formulaire et clique sur le bouton "Ajouter"
   e.preventDefault();
+  if (!checkUserLoggedIn()) return;
 
   const form = e.target;
   const formData = new FormData(form);
@@ -166,6 +167,8 @@ function ajouterArticle(e) {
   formData.append("titre", titre);
   formData.append("description", description);
   formData.append("contenu", contenu);
+  formData.append("username", userObject.username);
+  formData.append("password", userObject.password);
 
   // Envoyer les données du formulaire
   const requestOptions = {
@@ -173,7 +176,7 @@ function ajouterArticle(e) {
     body: formData,
   };
   const screen = monter(loadingScreen());
-  fetch(`${config.api}/addArticle`, requestOptions)
+  fetch(`${config.api}/private/addArticle`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
       getArticles();
