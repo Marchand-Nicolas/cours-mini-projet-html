@@ -15,8 +15,8 @@ const basicURL =
   path.endsWith("profile.html");
 const relativePath = basicURL ? "./" : "../";
 const config = {
-  //api: "https://mini-projet-api.nico-best-pc-ever.ovh", // Addresse de l'api.,
-  api: "http://localhost:8000", // Addresse de l'api en local.
+  api: "https://mini-projet-api.nico-best-pc-ever.ovh", // Addresse de l'api.,
+  //api: "http://localhost:8000", // Addresse de l'api en local.
 };
 
 // Charger les autres scripts et composants utiles :
