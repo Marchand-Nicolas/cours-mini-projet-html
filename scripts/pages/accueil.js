@@ -76,9 +76,11 @@ function filtrerArticles(texte) {
       const article = articles[index];
       const titre = article.titre.toLowerCase();
       const description = article.description.toLowerCase();
+      // Trouver l'index du texte recherché dans le titre et la description
       const indexTitre = titre.indexOf(texte.toLowerCase());
       const indexDescription = description.indexOf(texte.toLowerCase());
       if (indexTitre !== -1) {
+        // Surligner le texte recherché
         copie[index].titre = `${article.titre.slice(
           0,
           indexTitre
@@ -110,7 +112,9 @@ function update() {
   fetch(`${config.api}/getArticles`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
+      // Supprimer tous les articles dynamiques
       articlesDynamiques.length = 0;
+      // Ajouter les articles dynamiques
       articlesDynamiques.push(
         ...data.map((article) => ({
           ...article,
@@ -137,9 +141,12 @@ function ajouterArticle(e) {
       popup("Erreur", "Veuillez remplir tous les champs du formulaire.")
     );
 
+  // Ajouter les données du formulaire dans un FormData
   formData.append("titre", titre);
   formData.append("description", description);
   formData.append("contenu", contenu);
+
+  // Envoyer les données du formulaire
   const requestOptions = {
     method: "POST",
     body: formData,
